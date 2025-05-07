@@ -1,0 +1,42 @@
+<div class="mt-5 position-relative searchBarContainer text-center">
+  <i class="fa-solid fa-magnifying-glass position-absolute searchIcon"></i>
+  <input
+  [(ngModel)]="value"
+  name="search"
+  (keydown.enter)="getAll(value)"
+  type="text"
+  class="myForm"
+  placeholder="Type something to search for..." />
+
+  <!-- 🎤 Microphone Button -->
+  <button type="button" class="mic-btn position-absolute" (click)="startListening()">
+    <i *ngIf="!isRecording" class="fa-solid fa-microphone"></i>
+    <i *ngIf="isRecording" class="fa-solid fa-stop"></i>
+  </button>
+</div>
+<div class="result" @slideDown *ngIf="hasSearched && value != ''" #resultContainer (scroll)="onScroll($event)">
+  <hr>
+  <h3>Search Result</h3>
+  <a *ngFor="let item of data" @lightSpeedInRight [href]="item.url"
+    class="link d-flex justify-content-between align-items-center mb-2">
+    <p class="url-text">{{item.url}}</p>
+    <i class="fa-regular fa-circle-right"></i>
+  </a>
+
+  <!-- No results message -->
+  <a *ngIf="data.length === 0 && hasSearched" class="link d-flex justify-content-between align-items-center mb-2">
+    <p>No result found.</p>
+  </a>
+
+  <!-- Loading indicator -->
+  <div *ngIf="isLoading" class="loading-more text-center my-2">
+    <p>Loading more results...</p>
+  </div>
+
+  <!-- End of results message -->
+  <div *ngIf="noMoreData && data.length > 0" class="end-of-results text-center my-2">
+    <p>No more results available</p>
+  </div>
+</div>
+
+<ngx-loading [show]="loadingService.loading"></ngx-loading>

@@ -1,0 +1,42 @@
+.notification-ring {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.notification-ring:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  height: 20px;
+  width: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #ff3e3e;
+  color: white;
+  font-size: 20px;
+}
+
+.menu-btn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: white;
+  padding-top: 10px;
+  margin-left: 10px;
+}

@@ -1,0 +1,18 @@
+h1 {
+  font-size: 100px;
+  margin-bottom: -50px;
+}
+
+.time {
+  margin-top: 135px !important;
+}
+
+.time,
+.date {
+  color: white;
+}
+@media (max-width:415px) {
+  h1{
+    font-size: 80px;
+  }
+}

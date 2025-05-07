@@ -1,0 +1,136 @@
+.searchIcon {
+  left: 150px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.result {
+  width: 80%;
+  margin: auto;
+  margin-top: -10px;
+  padding: 20px 30px;
+  padding-top: 0;
+  font-size: 28px;
+  background-color: white;
+  max-height: 250px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 0px 8px 0px 8px;
+}
+
+a {
+  color: white;
+  transition: color 1s;
+  padding: 5px 30px;
+  border-radius: 8px;
+  background-color: var(--main-color);
+}
+
+a p {
+  margin: 0;
+}
+
+a:hover {
+  color: black;
+}
+
+.mic-btn {
+  right: 150px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+.loading-more {
+  padding: 8px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.end-of-results {
+  color: #888;
+  font-style: italic;
+}
+
+/* URL text truncation */
+.url-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 30px); /* Account for the arrow icon */
+  margin: 0;
+}
+
+/* Link styling */
+.link {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Customize scrollbar for better visibility */
+.result::-webkit-scrollbar {
+  width: 6px;
+}
+
+.result::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.result::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.result::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+@media (max-width:1399.5px) {
+  .searchIcon {
+    left: 135px;
+  }
+  .mic-btn {
+    right: 135px;
+  }
+}
+@media (max-width:1199.5px) {
+  .searchIcon {
+    left: 115px;
+  }
+  .mic-btn {
+    right: 115px;
+  }
+}
+@media (max-width:991.5px) {
+  .searchIcon {
+    left: 90px;
+  }
+  .mic-btn {
+    right: 90px;
+  }
+}
+@media (max-width:767.5px) {
+  .searchIcon {
+    left: 70px;
+  }
+  .mic-btn {
+    right: 70px;
+  }
+}
+@media (max-width:476px) {
+  .searchIcon {
+    left: 25px;
+  }
+  .mic-btn {
+    right: 25px;
+  }
+}

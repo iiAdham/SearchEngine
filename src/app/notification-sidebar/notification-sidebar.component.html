@@ -1,0 +1,68 @@
+<div class="notification-sidebar-overlay" [class.active]="isOpen" (click)="onClose()"></div>
+<div class="notification-sidebar" [class.open]="isOpen">
+  <div class="notification-header">
+    <h2>Notifications</h2>
+    <div class="notification-actions">
+      <button class="mark-read-btn" (click)="markAllAsRead()" *ngIf="notificationService.unreadCount > 0">
+        Mark all as read
+      </button>
+      <button class="close-btn" (click)="onClose()">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="notification-list">
+    <ng-container *ngIf="notifications.length > 0; else emptyState">
+      <div *ngFor="let notification of notifications" (click)="markAsRead(notification)" class="notification-item"
+        [class.unread]="!notification.read">
+        <div class="notification-content">
+          <div class="notification-title">{{ notification.title }}</div>
+          <div class="notification-message">{{ notification.content }}</div>
+          <div class="notification-time">{{ formatDate(notification.timestamp) }}</div>
+        </div>
+        <button class="remove-btn" (click)="removeNotification(notification.id, $event)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <p>No notifications yet</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+
+<div class="notification-sidebar-overlay" [class.active]="isOpenMenu" (click)="onClose()"></div>
+<div class="notification-sidebar" [class.open]="isOpenMenu">
+  <div class="notification-header">
+    <h2>Recent Search History</h2>
+    <div class="notification-actions">
+      <button class="close-btn" (click)="onClose()">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="notification-list">
+    <ng-container *ngIf="History.length > 0; else emptyHistoryState">
+      <ul class="tag">
+          <button *ngFor="let item of History" (click)="sendToSearchBar(item)" class="tag__name position-relative">
+            {{item}}
+            <span class="position-absolute top-0 x-mark-btn" (click)="removeHistoryItem(item, $event)">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </span>
+          </button>
+      </ul>
+    </ng-container>
+
+    <ng-template #emptyHistoryState>
+      <div class="empty-state">
+        <p>No search history yet</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

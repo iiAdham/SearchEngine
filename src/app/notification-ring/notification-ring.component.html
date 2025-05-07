@@ -1,0 +1,11 @@
+<div class="d-flex align-items-center">
+  <button (click)="onClick()" class="notification-ring" aria-label="Open notifications">
+    <i class="fa-solid fa-bell"></i>
+    <span *ngIf="notificationService.unreadCount > 0" class="notification-badge">
+      {{ notificationService.unreadCount > 99 ? '99+' : notificationService.unreadCount }}
+    </span>
+  </button>
+  <button (click)="onClickMenu()" class="menu-btn">
+    <i class="fa-solid fa-ellipsis-vertical"></i>
+  </button>
+</div>

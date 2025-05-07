@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  font-family: "Jomhuria", serif;
+  /* font-weight: 400; */
+  /* font-style: normal; */
+}
+
+:root {
+  --main-color: #A63446;
+  --secondary-color: #F18193;
+  --black: #1B1B1B;
+}
+
+.myForm {
+  width: 80%;
+  height: 60px;
+  border: none;
+  outline: none;
+  padding-left: 50px;
+  font-size: 35px;
+  border-radius: 8px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.color-main {
+  color: var(--main-color) !important;
+}
+
+.rtl-toast {
+  direction: rtl;
+  text-align: right;
+  font-family: 'Cairo', sans-serif;
+  font-size: 20px;
+}
+
+.rtl-toast .toast-message {
+  direction: rtl;
+  text-align: right;
+}
+
+@media (max-width:476px) {
+  .myForm {
+    width: 95%;
+    font-size: 25px;
+  }
+}

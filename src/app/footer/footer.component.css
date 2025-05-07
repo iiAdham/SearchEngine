@@ -1,0 +1,27 @@
+.footer {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+p {
+  color: white;
+  font-size: 25px;
+  opacity: 50%;
+}
+
+@media (max-width:879px) {
+  .footer {
+    width:100%
+  }
+}
+@media (max-width:442px) {
+  .footer {
+    display: block !important;
+    text-align: center;
+  }
+  p{
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
