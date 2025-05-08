@@ -13,7 +13,6 @@ declare global {
   }
 }
 
-
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
@@ -66,8 +65,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   constructor(private apiService: ApiService, public loadingService: LoadingService, private searchHistoryService: SearchHistoryService) {
     this.startSound = new Audio('assets/sounds/playRec.aac');
     this.stopSound = new Audio('assets/sounds/stopRec.aac');
-    this.startSound.volume = 1; // Maximum volume (range 0 to 1)
-    this.stopSound.volume = 1; // Maximum volume (range 0 to 1)
+    this.startSound.volume = 1;
+    this.stopSound.volume = 1;
 
     const SpeechRecognitionClass = window.SpeechRecognition || window.webkitSpeechRecognition;
     this.recognition = new SpeechRecognitionClass();
@@ -123,12 +122,14 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     const startIndex = this.currentPage * this.pageSize;
     const endIndex = startIndex + this.pageSize;
 
+    // No more data to show condition
     if (startIndex >= this.allData.length) {
       this.noMoreData = true;
       this.isLoading = false;
       return;
     }
 
+    // show next batch (next page).
     const nextBatch = this.allData.slice(startIndex, endIndex);
     this.data = [...this.data, ...nextBatch];
     this.isLoading = false;
@@ -177,9 +178,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       this.allData = filteredResults;
       // Load only first page initially
       this.data = this.allData.slice(0, this.pageSize);
-      console.log(this.data);
 
-      // Save search term to history
+      // Save search to history
       this.searchHistoryService.saveToHistory(this.value);
     });
   }

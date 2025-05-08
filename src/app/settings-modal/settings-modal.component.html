@@ -1,0 +1,100 @@
+<div class="settings-modal-overlay" *ngIf="isOpen">
+  <div class="settings-modal" >
+    <div class="settings-modal-header">
+      <h2>Theme Settings</h2>
+      <button class="close-button" (click)="closeModal()">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+
+    <div class="tabs">
+      <button [class.active]="activeTab === 'light'" (click)="switchTab('light')">Light Theme</button>
+      <button [class.active]="activeTab === 'dark'" (click)="switchTab('dark')">Dark Theme</button>
+    </div>
+
+    <div class="settings-content" *ngIf="activeTab === 'light'">
+      <div class="setting-group">
+        <label>Background Color</label>
+        <div class="color-input-wrapper">
+          <input type="color" [(ngModel)]="lightTheme.background" />
+          <span>{{lightTheme.background}}</span>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <label>Particle Colors</label>
+        <div class="particle-colors">
+          <div class="particle-color-item" *ngFor="let color of lightTheme.particles; let i = index">
+            <div class="color-input-wrapper">
+              <input type="color" [(ngModel)]="lightTheme.particles[i]" />
+              <span>{{color}}</span>
+            </div>
+            <button class="remove-color" (click)="removeParticleColor('light', i)" [disabled]="lightTheme.particles.length <= 1">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+          </div>
+          <button class="add-color" (click)="addParticleColor('light')">
+            <i class="fa-solid fa-plus"></i> Add Color
+          </button>
+        </div>
+      </div>
+
+      <div class="preview">
+        <div class="preview-box" [style.background-color]="lightTheme.background">
+          <div class="preview-particle" *ngFor="let color of lightTheme.particles; let i = index"
+               [style.background-color]="color"
+               [style.left]="(i * 20) + 10 + 'px'"
+               [style.top]="(i * 10) + 15 + 'px'"
+               [style.width]="(10 - i * 0.5) + 'px'"
+               [style.height]="(10 - i * 0.5) + 'px'">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-content" *ngIf="activeTab === 'dark'">
+      <div class="setting-group">
+        <label>Background Color</label>
+        <div class="color-input-wrapper">
+          <input type="color" [(ngModel)]="darkTheme.background" />
+          <span>{{darkTheme.background}}</span>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <label>Particle Colors</label>
+        <div class="particle-colors">
+          <div class="particle-color-item" *ngFor="let color of darkTheme.particles; let i = index">
+            <div class="color-input-wrapper">
+              <input type="color" [(ngModel)]="darkTheme.particles[i]" />
+              <span>{{color}}</span>
+            </div>
+            <button class="remove-color" (click)="removeParticleColor('dark', i)" [disabled]="darkTheme.particles.length <= 1">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+          </div>
+          <button class="add-color" (click)="addParticleColor('dark')">
+            <i class="fa-solid fa-plus"></i> Add Color
+          </button>
+        </div>
+      </div>
+
+      <div class="preview">
+        <div class="preview-box" [style.background-color]="darkTheme.background">
+          <div class="preview-particle" *ngFor="let color of darkTheme.particles; let i = index"
+               [style.background-color]="color"
+               [style.left]="(i * 20) + 10 + 'px'"
+               [style.top]="(i * 10) + 15 + 'px'"
+               [style.width]="(8 - i * 0.3) + 'px'"
+               [style.height]="(8 - i * 0.3) + 'px'">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-modal-footer">
+      <button class="reset-button" (click)="resetToDefaults()">Reset to Default</button>
+      <button class="save-button" (click)="saveAndClose()">Save Changes</button>
+    </div>
+  </div>
+</div>

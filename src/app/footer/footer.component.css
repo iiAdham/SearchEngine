@@ -8,6 +8,7 @@ p {
   color: white;
   font-size: 25px;
   opacity: 50%;
+  margin-bottom: 0;
 }
 
 @media (max-width:879px) {

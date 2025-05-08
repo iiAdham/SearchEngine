@@ -1,0 +1,230 @@
+.settings-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.settings-modal {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  color: var(--text-color, #333);
+}
+
+.settings-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 12px;
+}
+
+.settings-modal-header h2 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-color, #333);
+  transition: transform 0.3s ease;
+}
+
+.close-button:hover {
+  transform: rotate(90deg);
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tabs button {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  position: relative;
+  color: var(--text-color, #333);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.tabs button.active {
+  opacity: 1;
+}
+
+.tabs button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--accent-color, #8F87F1);
+}
+
+.setting-group {
+  margin-bottom: 20px;
+}
+
+.setting-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.color-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.color-input-wrapper input[type="color"] {
+  border: none;
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.particle-colors {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.particle-color-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.add-color, .remove-color {
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+.add-color:hover, .remove-color:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.add-color {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.remove-color:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.preview {
+  margin-top: 24px;
+  margin-bottom: 20px;
+}
+
+.preview-box {
+  width: 100%;
+  height: 120px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.settings-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.reset-button, .save-button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.reset-button {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: var(--text-color, #333);
+}
+
+.reset-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.save-button {
+  background-color: var(--accent-color, #8F87F1);
+  border: none;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: var(--accent-hover, #7b75d9);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjustments for dark theme */
+:host-context(.light) .settings-modal {
+  background-color: var(--dark-bg, #201e30);
+  color: var(--dark-text, #fff);
+}
+
+:host-context(.light) .close-button,
+:host-context(.light) .tabs button {
+  color: var(--light-text, #fff);
+}
+
+:host-context(.light) .add-color,
+:host-context(.light) .remove-color,
+:host-context(.light) .reset-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--light-text, #fff);
+}
+
+:host-context(.light) .add-color:hover,
+:host-context(.light) .remove-color:hover,
+:host-context(.light) .reset-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+span{
+  font-size: 25px;
+  color: var(--main-color);
+}

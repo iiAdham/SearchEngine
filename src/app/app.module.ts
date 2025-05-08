@@ -16,6 +16,7 @@ import { NotificationRingComponent } from './notification-ring/notification-ring
 import { NotificationSidebarComponent } from './notification-sidebar/notification-sidebar.component';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { SettingsModalComponent } from './settings-modal/settings-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     RedirectComponent,
     NotificationRingComponent,
     NotificationSidebarComponent,
+    SettingsModalComponent,
   ],
   imports: [
     BrowserModule,

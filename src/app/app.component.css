@@ -117,3 +117,17 @@ button.dark {
   right: 20px;
   z-index: 30;
 }
+
+.settings-button{
+  color: white;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  position: absolute;
+  top: 21.5px;
+  right: 92px;
+  padding:10px;
+  height: 40px;
+  width: 40px;
+}

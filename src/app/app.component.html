@@ -14,15 +14,27 @@
 <app-notification-sidebar [isOpen]="isSidebarOpen" (close)="closeNotificationSidebar()"></app-notification-sidebar>
 <app-notification-sidebar [isOpenMenu]="isSideMenuOpen" (close)="closeHistorySidebar()"></app-notification-sidebar>
 
+<!-- Settings Modal -->
+<app-settings-modal
+  [isOpen]="isSettingsOpen"
+  (close)="closeSettingsModal()"
+  (saveSettings)="saveSettings($event)">
+</app-settings-modal>
 
 <router-outlet></router-outlet>
 <div class="theme-transition-overlay" #transitionOverlay></div>
 <app-footer></app-footer>
 <ngx-loading [show]="loading"
   [config]="{ backdropBorderRadius: '3px',backdropBackgroundColour: 'rgba(0, 0, 0, 0.95)', primaryColour:'#A63446', secondaryColour: '#F18193', tertiaryColour:'#A63446' }"></ngx-loading>
-<div [ngClass]="theme">
-  <button [ngClass]="theme == 'light' ? 'dark' : 'light' " (click)="toggleTheme()">
+
+<!-- Theme toggle and settings buttons -->
+<div class="theme-controls" [ngClass]="theme">
+  <button class="theme-button" [ngClass]="theme == 'light' ? 'dark' : 'light' " (click)="toggleTheme()">
     <i class="fa-solid" [ngClass]="theme == 'light' ? 'fa-moon' : 'fa-sun' "></i>
   </button>
+  <button *ngIf="true" class="settings-button" (click)="openSettingsModal()">
+    <i class="fa-solid fa-gear"></i>
+  </button>
 </div>
+
 <div class="cursor-dot"></div>
