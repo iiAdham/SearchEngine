@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NotificationService } from './services/notification.service';
+import { AuthService } from './services/auth.service';
+import { Observable } from 'rxjs';
 declare var FinisherHeader: any;
 
 @Component({
@@ -39,6 +41,9 @@ export class AppComponent implements OnInit {
     'اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي، وَعَنْ يَمِينِي وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي'
   ];
 
+  // Add a flag to track if initial duaa has been shown
+  private initialDuaaShown = false;
+
   // Theme configuration settings
   lightThemeConfig: any = {
     background: '#8F87F1',
@@ -59,14 +64,26 @@ export class AppComponent implements OnInit {
     ]
   };
 
-  constructor(private toastr: ToastrService, private notificationService: NotificationService) { }
+  isDarkMode = false;
+  isAuthenticated$: Observable<boolean>;
+
+  constructor(
+    private toastr: ToastrService,
+    private notificationService: NotificationService,
+    private authService: AuthService
+  ) {
+    this.isAuthenticated$ = this.authService.isAuthenticated();
+  }
 
   showRandomDuaa() {
-    const randomIndex = Math.floor(Math.random() * this.duaas.length);
-    const duaa = this.duaas[randomIndex];
-    setTimeout(() => {
-      this.notificationService.addNotification('دعاء اليوم', duaa);
-    }, 5000);
+    // Only show duaa if user is authenticated
+    if (this.authService.isAuthenticatedValue()) {
+      const randomIndex = Math.floor(Math.random() * this.duaas.length);
+      const duaa = this.duaas[randomIndex];
+      setTimeout(() => {
+        this.notificationService.addNotification('دعاء اليوم', duaa);
+      }, 5000);
+    }
   }
 
   getRandomInterval(): number {
@@ -76,16 +93,20 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showRandomDuaa();
+    // Set up subscription to authentication state changes
+    this.authService.isAuthenticated().subscribe(isAuthenticated => {
+      if (isAuthenticated && !this.initialDuaaShown) {
+        // Show a duaa when user logs in, but only if we haven't shown one yet
+        this.initialDuaaShown = true;
+        this.showRandomDuaa();
+      }
+    });
 
     // Optionally, keep showing a new duaa every 2–5 minutes randomly
+    // but only if the user is authenticated
     setInterval(() => {
       this.showRandomDuaa();
     }, this.getRandomInterval());
-
-    setInterval(() => {
-      this.loading = false;
-    }, 1000);
 
     // Load saved theme configurations
     this.loadThemeSettings();
@@ -97,7 +118,19 @@ export class AppComponent implements OnInit {
       this.theme = 'light'; // Light as default
     }
 
+    // Initialize cursor dot
+    this.initCursorDot();
+
+    // Initialize particle effect
+    setTimeout(() => {
+      this.initParticleEffect();
+      this.loading = false;
+    }, 1000);
+  }
+
+  private initCursorDot(): void {
     const dot = document.querySelector('.cursor-dot') as HTMLElement;
+    if (!dot) return;
 
     let mouseX = 0;
     let mouseY = 0;
@@ -113,18 +146,17 @@ export class AppComponent implements OnInit {
       mouseX = e.clientX;
       mouseY = e.clientY;
     });
+
     if (!this.initialized) {
       dot.style.top = `0`;
       dot.style.left = `0`;
       this.initialized = true;
     }
+
     const animate = () => {
-      dot.style.top = `0`;
-      dot.style.left = `0`;
-      dotX += (mouseX - dotX) * 0.1; // control lag here (0.1 is 10%)
+      dotX += (mouseX - dotX) * 0.1;
       dotY += (mouseY - dotY) * 0.1;
       dot.style.transform = `translate(${dotX}px, ${dotY}px)`;
-
       requestAnimationFrame(animate);
     };
 
@@ -296,5 +328,8 @@ export class AppComponent implements OnInit {
 
     // Initialize particle effect with new settings
     this.initParticleEffect();
+
+    // Close the settings modal
+    this.closeSettingsModal();
   }
 }

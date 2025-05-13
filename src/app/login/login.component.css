@@ -1,0 +1,198 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  position: relative;
+  z-index: 1;
+  padding: 10px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.auth-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px !important;
+  min-width: 320px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 0 auto;
+  animation: card-pulse 3s infinite ease-in-out;
+  transition: all 0.3s ease;
+  max-height: 95vh;
+  overflow-y: auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--main-color);
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: black;
+  font-size: 14px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  font-family: 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: black;
+  backdrop-filter: blur(5px);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.form-control:focus {
+  border-color: var(--main-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(var(--main-color-rgb), 0.25);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.form-control::placeholder {
+  color: black;
+  opacity: 0.3;
+  font-size: 23px;
+}
+
+button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: rgba(var(--main-color-rgb), 0.8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+button:disabled {
+  background-color: rgba(204, 204, 204, 0.5);
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 13px;
+  margin-top: 0.2rem;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  font-family: 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+.auth-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 25px;
+  color: var(--main-color);
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+a {
+  color: var(--main-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+.register-link {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+.register-link:hover::after {
+  width: 100%;
+}
+
+/* Password visibility toggle */
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 1.2rem;
+  z-index: 10;
+  transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+  color: var(--main-color);
+}
+
+/* Animation for the card */
+@keyframes card-pulse {
+  0% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(var(--main-color-rgb), 0.2);
+  }
+  100% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+}

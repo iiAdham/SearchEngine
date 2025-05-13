@@ -9,6 +9,29 @@
   pointer-events: none;
 }
 
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
 router-outlet {
   position: relative;
   z-index: 1;
@@ -56,10 +79,51 @@ button.dark {
   background: var(--overlay-color);
   transform: translateX(-100%);
   transition: transform 0.6s ease-in-out, opacity 0.3s ease;
+  z-index: 9998;
 }
 
 .notification-container {
-  position: relative;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 900;
+}
+
+.settings-button {
+  color: white;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  position: fixed;
+  top: 21.5px;
+  right: 20px;
+  padding: 10px;
+  height: 40px;
+  width: 40px;
+  z-index: 900;
+  transition: right 0.3s ease;
+}
+
+.settings-button.authenticated {
+  right: 115px;
+}
+
+.theme-controls {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 900;
+  display: flex;
+  gap: 10px;
+}
+
+app-notification-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 1000;
 }
 
 .notification-ring {
@@ -111,23 +175,34 @@ button.dark {
   background-color: #cc0000;
 }
 
-.notification-container {
+.finisher-header {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 30;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--finisher-header-background, #f5f5f5);
+  transition: background 0.3s ease;
 }
 
-.settings-button{
-  color: white;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  font-size: 16px;
-  position: absolute;
-  top: 21.5px;
-  right: 92px;
-  padding:10px;
-  height: 40px;
-  width: 40px;
+.finisher-header.dark {
+  --finisher-header-background: #1a1a1a;
 }
+
+/* Ensure other components are positioned correctly */
+app-notification-ring,
+app-notification-sidebar {
+  position: fixed;
+  z-index: 950;
+}
+
+app-notification-ring {
+  right: 2rem;
+}
+
+app-home {
+  width: 100% !important;
+  display: block;
+}
+
+/* Remove all custom loading styles */

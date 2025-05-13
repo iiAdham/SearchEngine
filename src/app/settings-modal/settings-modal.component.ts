@@ -26,6 +26,8 @@ export class SettingsModalComponent implements OnInit {
   // Current active tab
   activeTab = 'light';
 
+  isLoading = false;
+
   constructor(private loadingService:LoadingService) { }
 
   ngOnInit(): void {
@@ -51,8 +53,8 @@ export class SettingsModalComponent implements OnInit {
   }
 
   closeModal(): void {
-    this.isOpen = false;
     this.close.emit();
+    this.isOpen = false;
   }
 
   switchTab(tab: string): void {
@@ -75,25 +77,31 @@ export class SettingsModalComponent implements OnInit {
     }
   }
 
-  saveAndClose(): void {
+  onSave(): void {
+    this.isLoading = true;
+
     // Save to localStorage
     localStorage.setItem('lightThemeSettings', JSON.stringify(this.lightTheme));
     localStorage.setItem('darkThemeSettings', JSON.stringify(this.darkTheme));
+
+    const settings = {
+      light: this.lightTheme,
+      dark: this.darkTheme
+    };
+
+    // Use loading service for app-wide loading indicator
     this.loadingService.show();
-    this.closeModal();
+
+    // Emit settings to parent component
+    this.saveSettings.emit(settings);
+
+    // Close modal and reset loading state after a delay
     setTimeout(() => {
+      this.isLoading = false;
       this.loadingService.hide();
-
-      // Emit event to parent component to update themes
-      this.saveSettings.emit({
-        light: this.lightTheme,
-        dark: this.darkTheme
-      });
-
-
+      this.close.emit();
+      this.isOpen = false;
     }, 1000);
-
-
   }
 
   resetToDefaults(): void {

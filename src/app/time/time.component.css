@@ -1,16 +1,27 @@
 h1 {
   font-size: 100px;
-  margin-bottom: -50px;
+  margin-bottom: -30px;
+  width: 100%;
+  text-align: center;
 }
 
 .time {
-  margin-top: 135px !important;
+  margin-top: 0 !important;
+  width: 100%;
+  text-align: center;
+}
+
+.date {
+  width: 100%;
+  text-align: center;
+  /* margin-bottom: 40px; */
 }
 
 .time,
 .date {
   color: white;
 }
+
 @media (max-width:415px) {
   h1{
     font-size: 80px;

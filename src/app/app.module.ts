@@ -7,7 +7,7 @@ import { TimeComponent } from './time/time.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RedirectComponent } from './redirect/redirect.component';
 import { NgxLoadingModule } from "ngx-loading";
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -17,6 +17,8 @@ import { NotificationSidebarComponent } from './notification-sidebar/notificatio
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { SettingsModalComponent } from './settings-modal/settings-modal.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +31,14 @@ import { SettingsModalComponent } from './settings-modal/settings-modal.componen
     NotificationRingComponent,
     NotificationSidebarComponent,
     SettingsModalComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxLoadingModule.forRoot({}),
     BrowserAnimationsModule,
     HttpClientModule,

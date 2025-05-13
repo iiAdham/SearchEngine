@@ -4,15 +4,18 @@
 </div>
 <div class="background-overlay"></div>
 
-<!-- Header with notification ring -->
-<div class="notification-container">
-  <app-notification-ring (openSidebar)="openNotificationSidebar()"
-    (menuSidebar)="openHistorySidebar()"></app-notification-ring>
-</div>
+<!-- Only show these components when authenticated -->
+<ng-container *ngIf="isAuthenticated$ | async">
+  <!-- Header with notification ring -->
+  <div class="notification-container">
+    <app-notification-ring (openSidebar)="openNotificationSidebar()"
+      (menuSidebar)="openHistorySidebar()"></app-notification-ring>
+  </div>
 
-<!-- Notification Sidebar -->
-<app-notification-sidebar [isOpen]="isSidebarOpen" (close)="closeNotificationSidebar()"></app-notification-sidebar>
-<app-notification-sidebar [isOpenMenu]="isSideMenuOpen" (close)="closeHistorySidebar()"></app-notification-sidebar>
+  <!-- Notification Sidebar -->
+  <app-notification-sidebar [isOpen]="isSidebarOpen" (close)="closeNotificationSidebar()"></app-notification-sidebar>
+  <app-notification-sidebar [isOpenMenu]="isSideMenuOpen" (close)="closeHistorySidebar()"></app-notification-sidebar>
+</ng-container>
 
 <!-- Settings Modal -->
 <app-settings-modal
@@ -21,9 +24,13 @@
   (saveSettings)="saveSettings($event)">
 </app-settings-modal>
 
-<router-outlet></router-outlet>
+<!-- Main Content -->
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
+
 <div class="theme-transition-overlay" #transitionOverlay></div>
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->
 <ngx-loading [show]="loading"
   [config]="{ backdropBorderRadius: '3px',backdropBackgroundColour: 'rgba(0, 0, 0, 0.95)', primaryColour:'#A63446', secondaryColour: '#F18193', tertiaryColour:'#A63446' }"></ngx-loading>
 
@@ -32,7 +39,7 @@
   <button class="theme-button" [ngClass]="theme == 'light' ? 'dark' : 'light' " (click)="toggleTheme()">
     <i class="fa-solid" [ngClass]="theme == 'light' ? 'fa-moon' : 'fa-sun' "></i>
   </button>
-  <button *ngIf="true" class="settings-button" (click)="openSettingsModal()">
+  <button class="settings-button" [class.authenticated]="isAuthenticated$ | async" (click)="openSettingsModal()">
     <i class="fa-solid fa-gear"></i>
   </button>
 </div>

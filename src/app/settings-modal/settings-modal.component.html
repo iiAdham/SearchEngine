@@ -94,7 +94,10 @@
 
     <div class="settings-modal-footer">
       <button class="reset-button" (click)="resetToDefaults()">Reset to Default</button>
-      <button class="save-button" (click)="saveAndClose()">Save Changes</button>
+      <button class="save-button" [disabled]="isLoading" (click)="onSave()">
+        <span *ngIf="!isLoading">Save Changes</span>
+        <span *ngIf="isLoading">Saving...</span>
+      </button>
     </div>
   </div>
 </div>

@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: center;
   color: white;
+  z-index: 950;
 }
 
 .notification-ring:hover {
@@ -39,4 +40,21 @@
   color: white;
   padding-top: 10px;
   margin-left: 10px;
+  z-index: 950;
+}
+
+.logout-btn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: white;
+  padding-top: 10px;
+  margin-left: 15px;
+  z-index: 950;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.logout-btn:hover {
+  color: #ff3e3e;
 }
